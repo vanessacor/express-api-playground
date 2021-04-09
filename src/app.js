@@ -9,7 +9,11 @@ function createApp(logger) {
       version: "1.0",
     });
   });
-  
+
+  app.use((req, res) => {
+    res.status(404);
+    res.json({ message: "not found :-(" });
+  });
 
   return app;
 }
