@@ -1,12 +1,17 @@
+const express = require("express");
 
-const express = require('express')
-const app = express()
-const port = 3000
+function createApp(logger) {
+  const app = express();
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+  app.get("/", (req, res) => {
+    res.json({
+      api: "express playground",
+      version: "1.0",
+    });
+  });
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
+  return app;
+}
+
+module.exports = createApp;
+
