@@ -1,8 +1,18 @@
 const express = require("express");
 
-function createApp(logger) {
-  const app = express();
+const mongoose = require("mongoose");
 
+const options = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+};
+
+function createApp(logger, URI) {
+  mongoose.connect(URI, options);
+  const db = mongoose.connection;
+  db.on("error", (err) => console.error(err));
+
+  const app = express();
   app.get("/", (req, res) => {
     res.json({
       api: "express playground",
@@ -19,4 +29,3 @@ function createApp(logger) {
 }
 
 module.exports = createApp;
-
